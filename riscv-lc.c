@@ -86,7 +86,11 @@ void eval_bus_drivers() {
      */
     /* input of GateMAR */
     // value_of_GateMAR = ?;
-    error("Lab3-3 assignment: value_of_GateMAR = ?;\n");
+    //error("Lab3-3 assignment: value_of_GateMAR = ?;\n");
+    if(get_MARMUX(CURRENT_LATCHES.MICROINSTRUCTION))
+        value_of_GateMAR = logic_shift_20_function_unit(mask_val(CURRENT_LATCHES.IR, 31, 12));
+    else
+        value_of_GateMAR = value_of_MARMUX;
 
     /* output of ALU */
     value_of_alu = alu(
@@ -111,15 +115,33 @@ void eval_bus_drivers() {
      */
     /* output of the shift function unit */
     // value_of_shift_function_unit = ?;
-    error("Lab3-3 assignment: value_of_shift_function_unit = ?;\n");
-
+    //error("Lab3-3 assignment: value_of_shift_function_unit = ?;\n");
+    value_of_shift_function_unit = shift_function_unit(
+        mask_val(CURRENT_LATCHES.IR, 14, 12),
+        mask_val(CURRENT_LATCHES.IR, 31, 25),
+        rs1_en(
+            get_RS1En(CURRENT_LATCHES.MICROINSTRUCTION),
+            CURRENT_LATCHES.REGS[mask_val(CURRENT_LATCHES.IR, 19, 15)]
+        ),
+        rs2_mux(
+            get_RS2MUX(CURRENT_LATCHES.MICROINSTRUCTION),
+            rs2_en(
+                get_RS2En(CURRENT_LATCHES.MICROINSTRUCTION),
+                CURRENT_LATCHES.REGS[mask_val(CURRENT_LATCHES.IR, 24, 20)]
+            ),
+            sext_unit(mask_val(CURRENT_LATCHES.IR, 31, 20), 12)
+        )
+    );
     /*
      *  Lab3-3 assignment
      */
     /* input of GateALUSHF */
     // value_of_GateALUSHF = ?;
-    error("Lab3-3 assignment: value_of_GateALUSHF = ?;\n");
-
+    //error("Lab3-3 assignment: value_of_GateALUSHF = ?;\n");
+    if(mask_val(CURRENT_LATCHES.IR, 14, 12) == 1 || mask_val(CURRENT_LATCHES.IR, 14, 12) == 5)
+        value_of_GateALUSHF = value_of_shift_function_unit;
+    else
+        value_of_GateALUSHF = value_of_alu;
     /* input of GatePC */
     value_of_GatePC = CURRENT_LATCHES.PC;
 
@@ -127,8 +149,8 @@ void eval_bus_drivers() {
      *  Lab3-3 assignment
      */
     /* input of GateRS2 */
-    error("Lab3-3 assignment: value_of_GateRS2 = ?;\n");
-
+    //error("Lab3-3 assignment: value_of_GateRS2 = ?;\n");
+    value_of_GateRS2 = CURRENT_LATCHES.REGS[mask_val(CURRENT_LATCHES.IR, 24, 20)];
     /* input of GateMDR */
     value_of_GateMDR = CURRENT_LATCHES.MDR;
 }
