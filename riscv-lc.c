@@ -151,8 +151,7 @@ void latch_datapath_values() {
         /*
          *  Lab3-2 assignment
          */
-        NEXT_LATCHES.PC = pc_mux(get_PCMUX(CURRENT_LATCHES.MICROINSTRUCTION), CURRENT_LATCHES.PC + 4, addr2_mux(get_ADDR2MUX(CURRENT_LATCHES.MICROINSTRUCTION), 0, sext_unit(mask_val(CURRENT_LATCHES.IR, 31, 20), 12),sext_unit(s_format_imm_gen_unit(mask_val(CURRENT_LATCHES.IR, 11, 7), mask_val(CURRENT_LATCHES.IR, 31, 25)),12), sext_unit(j_format_imm_gen_unit(mask_val(CURRENT_LATCHES.IR, 31, 31), mask_val(CURRENT_LATCHES.IR, 30, 21), mask_val(CURRENT_LATCHES.IR, 20, 20), mask_val(CURRENT_LATCHES.IR, 19, 12)), 2)) + 
-        addr1_mux(get_ADDR1MUX(CURRENT_LATCHES.MICROINSTRUCTION), 0, CURRENT_LATCHES.PC, rs1_en(get_RS1En(CURRENT_LATCHES.MICROINSTRUCTION), CURRENT_LATCHES.REGS[mask_val(CURRENT_LATCHES.IR, 19, 15)]), ext_unit(b_format_imm_gen_unit(mask_val(CURRENT_LATCHES.IR, 7, 7), mask_val(CURRENT_LATCHES.IR, 11, 8), mask_val(CURRENT_LATCHES.IR, 30, 25), mask_val(CURRENT_LATCHES.IR, 31, 31)),12)));
+        NEXT_LATCHES.PC = pc_mux(get_PCMUX(CURRENT_LATCHES.MICROINSTRUCTION), CURRENT_LATCHES.PC + 4, BUS);
         //error("Lab3-2 assignment: handle LD_PC");
     }
     /* RESET */
