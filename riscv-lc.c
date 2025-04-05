@@ -151,7 +151,8 @@ void latch_datapath_values() {
         /*
          *  Lab3-2 assignment
          */
-        NEXT_LATCHES.PC = pc_mux(get_PCMUX(CURRENT_LATCHES.MICROINSTRUCTION), CURRENT_LATCHES.PC + 4, BUS);
+        NEXT_LATCHES.PC = pc_mux(get_PCMUX(CURRENT_LATCHES.MICROINSTRUCTION), CURRENT_LATCHES.PC + 4, BUS + (CURRENT_LATCHES.PC - 4));
+        
         //error("Lab3-2 assignment: handle LD_PC");
     }
     /* RESET */
