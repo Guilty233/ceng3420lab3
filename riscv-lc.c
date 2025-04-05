@@ -171,15 +171,25 @@ void drive_bus() {
             BUS = 0;
             break;
         case 1:
-            error("Lab3-3 assignment: when value = 1, BUS = ?;\n");
+            BUS = value_of_GateMAR;
+            break;
+            //error("Lab3-3 assignment: when value = 1, BUS = ?;\n");
         case 2:
-            error("Lab3-3 assignment: when value = 2, BUS = ?;\n");
+            BUS = value_of_GateALUSHF;
+            break;
+            //error("Lab3-3 assignment: when value = 2, BUS = ?;\n");
         case 4:
-            error("Lab3-3 assignment: when value = 4, BUS = ?;\n");
+            BUS = value_of_GatePC;
+            break;
+            //error("Lab3-3 assignment: when value = 4, BUS = ?;\n");
         case 8:
-            error("Lab3-3 assignment: when value = 8, BUS = ?;\n");
+            BUS = value_of_GateRS2;
+            break;
+            //error("Lab3-3 assignment: when value = 8, BUS = ?;\n");
         case 16:
-            error("Lab3-3 assignment: when value = 16, BUS = ?;\n");
+            BUS = value_of_GateMDR;
+            break;
+            //error("Lab3-3 assignment: when value = 16, BUS = ?;\n");
         default:
             BUS = 0;
             warn("unknown gate drivers for BUS\n");
